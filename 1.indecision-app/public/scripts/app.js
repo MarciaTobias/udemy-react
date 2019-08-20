@@ -2,6 +2,25 @@
 
 console.log('App.js is running');
 
+// if statements
+// ternary operations
+// logical and operator
+
+// Chalenge 3
+// only render the subtitle (and p tag) if subtitle exist - logical and operator
+// render new p tag - if options.lenght > 0 "Here are your options" "No options"
+
+var app = {
+    title: 'Indecision App',
+    subtitle: 'Put your life in the hands of a computer',
+    options: ['One', 'Two']
+};
+
+// Challenge 2
+// create app object tittle/subtitle
+// user title/subtitle in the template
+// render template
+
 // JSX - JavaScript XML
 // wrap div
 var template = React.createElement(
@@ -10,12 +29,17 @@ var template = React.createElement(
     React.createElement(
         'h1',
         null,
-        'Marcia Tobias'
+        app.title
+    ),
+    app.subtitle && React.createElement(
+        'p',
+        null,
+        app.subtitle
     ),
     React.createElement(
         'p',
         null,
-        'This is some info!'
+        app.options.length > 0 ? 'Here are your options' : 'No options'
     ),
     React.createElement(
         'ol',
@@ -33,6 +57,7 @@ var template = React.createElement(
     )
 );
 
+// Challenge 1
 // Create a templateTwo var JSX expression
 // div
 //  h1 -> your name
@@ -40,6 +65,23 @@ var template = React.createElement(
 // p -> Location: 
 // Render templateTwo instead of template
 
+// User Object
+var user = {
+    name: 'Andrew',
+    age: 27,
+    location: 'New York'
+};
+
+function getLocation(location) {
+    if (location) {
+        return React.createElement(
+            'p',
+            null,
+            'Location: ',
+            location
+        );
+    }
+}
 
 var templateTwo = React.createElement(
     'div',
@@ -47,22 +89,24 @@ var templateTwo = React.createElement(
     React.createElement(
         'h1',
         null,
-        'Marcia Tobias'
+        user.name ? user.name : 'Anonymous'
     ),
     React.createElement(
-        'p',
+        'h2',
         null,
-        'Age: 36'
+        user.name.toUpperCase()
     ),
-    React.createElement(
+    user.age && user.age >= 18 && React.createElement(
         'p',
         null,
-        'Location: Ireland'
-    )
+        'Age: ',
+        user.age
+    ),
+    getLocation(user.location)
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
+ReactDOM.render(template, appRoot);
 
 // ReactDOM.render(template, appRoot);
